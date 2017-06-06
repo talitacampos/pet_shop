@@ -1,7 +1,55 @@
-Dogs
+<div class="list_dogs" ng-app="petShop">
+  <div ng-controller="DogsListController">
+    <div class="loading"
+         ng-if="loading">
+      Carregando...
+    </div>
 
-<pre>
-  <% @dogs.each do |dog| %>
-    <%= dog %>
-  <% end %>
-</pre>
+    <div class="error"
+         ng-if="!loading && error">
+      Ocorreu algum problema na aplicação. Favor recarregá-la.
+    </div>
+
+    <div class="content"
+         ng-if="!loading && !error">
+      Cães
+
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Nome</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Proprietário</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Raça</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Gênero</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Castrado</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Data de Nascimento</div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Última Consulta</div>
+      </div>
+
+      <div class="row"
+           ng-repeat="dog in dogs">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+          {{ dog.name }}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          {{ dog.owner_name }} - {{ dog.owner_phone }}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          {{ dog.breed }}
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          {{ dog.genre === 'male' ? 'Macho' : 'Fêmea' }}
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          {{ dog.castrated ? 'Sim' : 'Não' }}
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          {{ dog.birth }}
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          {{ dog.last_visit }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

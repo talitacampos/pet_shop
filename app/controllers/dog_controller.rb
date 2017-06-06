@@ -1,10 +1,20 @@
 class DogController < ApplicationController
 
   def index
+  end
+
+  def list
     @dogs = Array.new
 
     (1..1000).each do |i|
       @dogs.push(generate_dog_data())
+    end
+
+    @dogs = @dogs.sort_by { |d| d['name'] }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @dogs }
     end
   end
 
