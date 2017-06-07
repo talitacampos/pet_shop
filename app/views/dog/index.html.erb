@@ -1,51 +1,56 @@
-<div class="list_dogs" ng-app="petShop">
-  <div ng-controller="DogsListController">
+<div ng-app="petShop">
+
+  <div ng-controller="DogsListController"
+       class="list_dogs">
+
     <div class="loading"
          ng-if="loading">
-      Carregando...
     </div>
 
     <div class="error"
-         ng-if="!loading && error">
+         ng-if="!loading && hasError">
       Ocorreu algum problema na aplicação. Favor recarregá-la.
     </div>
 
-    <div class="content"
-         ng-if="!loading && !error">
-      Cães
+    <div ng-if="!loading && !hasError">
+      <h1>Cães</h1>
 
-      <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Nome</div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Proprietário</div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Raça</div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Gênero</div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Castrado</div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Data de Nascimento</div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Última Consulta</div>
-      </div>
+      <div class="content">
+        <div class="table">
+          <div class="row header">
+            <div class="column name">Nome</div>
+            <div class="column owner">Proprietário</div>
+            <div class="column breed">Raça</div>
+            <div class="column genre">Gênero</div>
+            <div class="column castrated">Castrado</div>
+            <div class="column birth">Data de Nascimento</div>
+            <div class="column last_visit">Última Consulta</div>
+          </div>
 
-      <div class="row"
-           ng-repeat="dog in dogs">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-          {{ dog.name }}
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          {{ dog.owner_name }} - {{ dog.owner_phone }}
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          {{ dog.breed }}
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          {{ dog.genre === 'male' ? 'Macho' : 'Fêmea' }}
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          {{ dog.castrated ? 'Sim' : 'Não' }}
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          {{ dog.birth }}
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          {{ dog.last_visit }}
+          <div class="row"
+               ng-repeat="dog in dogs">
+            <div class="column name">
+              <span class="label">Nome:</span>{{ dog.name }}
+            </div>
+            <div class="column owner">
+              <span class="label">Propietário:</span>{{ dog.owner_name }} - {{ dog.owner_phone }}
+            </div>
+            <div class="column breed">
+              <span class="label">Raça:</span>{{ dog.breed }}
+            </div>
+            <div class="column genre">
+              <span class="label">Gênero:</span>{{ dog.genre === 'male' ? 'Macho' : 'Fêmea' }}
+            </div>
+            <div class="column castrated">
+              <span class="label">Castrado:</span>{{ dog.castrated ? 'Sim' : 'Não' }}
+            </div>
+            <div class="column birth">
+              <span class="label">Data de Nascimento:</span>{{ dog.birth }}
+            </div>
+            <div class="column last_visit">
+              <span class="label">Última Consulta:</span>{{ dog.last_visit }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

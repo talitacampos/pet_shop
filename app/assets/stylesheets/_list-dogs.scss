@@ -1,0 +1,82 @@
+.list_dogs {
+  h1 {
+    margin: 20px;
+  }
+
+  .table {
+    .row {
+      border-bottom: 1px solid #d4d4d4;
+      margin: 0;
+      font-size: 0;
+
+      .column {
+        display: inline-block;
+        font-size: 12px;
+        padding: 5px;
+        vertical-align: top;
+
+        .label {
+          display: none;
+          font-size: 12px;
+          font-weight: bold;
+          color: #424242;
+        }
+
+        &.name, &.owner, &.breed {
+          width: 20%;
+        }
+
+        &.genre, &.castrated, &.birth, &.last_visit {
+          width: 10%;
+          text-align: center;
+        }
+
+        @media all and (max-width: 768px) {
+          &.name, &.breed, &.birth, &.last_visit {
+            width: 15%;
+          }
+        }
+
+        @media all and (max-width: 600px) {
+          .label {
+            display: inline-block;
+          }
+
+          &.name, &.owner, &.breed {
+            width: 100%;
+            display: block;
+          }
+
+          &.genre, &.castrated, &.birth, &.last_visit {
+            width: 50%;
+            text-align: left;
+          }
+        }
+
+        @media all and (max-width: 480px) {
+          display: block;
+
+          &.name, &.owner, &.breed, &.genre, &.castrated, &.birth, &.last_visit {
+            width: 100%;
+            text-align: left;
+          }
+        }
+      }
+
+      &.header {
+        background: #d4d4d4;
+
+        .column {
+          font-size: 13px;
+          vertical-align: middle;
+          text-align: center;
+          font-weight: bold;
+        }
+
+        @media all and (max-width: 600px) {
+          display: none;
+        }
+      }
+    }
+  }
+}
