@@ -1,3 +1,5 @@
+NUMBER_DOGS = 1000
+
 BREEDS =[
   'Affenpinscher',
   'Afghan hound',
