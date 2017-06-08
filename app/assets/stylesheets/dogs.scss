@@ -4,7 +4,7 @@
   }
 
   .filters {
-    border: 1px solid #d4d4d4;
+    border: 1px solid #D4D4D4;
     border-radius: 3px;
     padding: 10px;
     margin-bottom: 20px;
@@ -54,8 +54,12 @@
   .table {
     min-height: 200px;
 
+    @media all and (max-width: 600px) {
+      min-height: 100px;
+    }
+
     .row {
-      border-bottom: 1px solid #d4d4d4;
+      border-bottom: 1px solid #D4D4D4;
       margin: 0;
       font-size: 0;
 
@@ -115,7 +119,7 @@
       }
 
       &.header {
-        background: #d4d4d4;
+        background: #D4D4D4;
 
         .column {
           font-size: 13px;
@@ -128,6 +132,14 @@
           display: none;
         }
       }
+    }
+
+    .empty-table {
+      text-align: center;
+      padding: 50px 0;
+      border: 1px solid #D4D4D4;
+      margin-top: 5px;
+      color: #7E7E7E;
     }
   }
 

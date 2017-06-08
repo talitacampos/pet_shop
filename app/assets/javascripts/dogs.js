@@ -12,8 +12,12 @@ petShop
       };
       $scope.currentPage = 1;
       $scope.totalPages = 0;
+      $scope.totalDogs = 0;
+      $scope.refreshingTable = false;
 
       var consumeBackend = function(params) {
+        $scope.refreshingTable = true;
+
         var config = {
           params: {}
         };
@@ -27,6 +31,7 @@ petShop
           .then(function(response) {
             $scope.dogs = response.data.items;
             $scope.totalPages = response.data.pages;
+            $scope.totalDogs = response.data.total;
           })
           .catch(function(error) {
             console.log('error', error);
@@ -34,6 +39,7 @@ petShop
           })
           .finally(function() {
             $scope.loading = false;
+            $scope.refreshingTable = false;
           });
       };
 

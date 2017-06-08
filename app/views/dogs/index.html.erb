@@ -76,7 +76,12 @@
             <div class="column last_visit">Última Consulta</div>
           </div>
 
+          <div class="table-loading"
+               ng-if="refreshingTable">
+          </div>
+
           <div class="row"
+               ng-if="!refreshingTable && totalDogs !== 0"
                ng-repeat="dog in dogs">
             <div class="column name">
               <span class="label">Nome:</span>{{ dog.name }}
@@ -100,10 +105,15 @@
               <span class="label">Última Consulta:</span>{{ dog.last_visit }}
             </div>
           </div>
+
+          <div class="!refreshingTable && empty-table"
+               ng-if="totalDogs === 0">
+            Não há resultados a serem exibidos
+          </div>
         </div>
 
         <div class="pagination"
-             ng-if="totalPages !== 1">
+             ng-if="!refreshingTable && totalPages > 1">
           <a href=""
              class="btn btn-default"
              ng-click="previousPage()"
