@@ -52,6 +52,8 @@
   }
 
   .table {
+    min-height: 200px;
+
     .row {
       border-bottom: 1px solid #d4d4d4;
       margin: 0;
@@ -126,6 +128,16 @@
           display: none;
         }
       }
+    }
+  }
+
+  .pagination {
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+
+    span {
+      padding: 0 15px;
     }
   }
 }

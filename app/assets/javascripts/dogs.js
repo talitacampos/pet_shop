@@ -10,16 +10,23 @@ petShop
         castrated: 'all',
         breed: 'all'
       };
+      $scope.currentPage = 1;
+      $scope.totalPages = 0;
 
       var consumeBackend = function(params) {
-        var config = {};
+        var config = {
+          params: {}
+        };
 
         if (params)
-          config.params = params;
+          config.params = angular.copy(params);
+
+        config.params.page = $scope.currentPage;
 
         $http.get('/dogs', config)
           .then(function(response) {
-            $scope.dogs = response.data;
+            $scope.dogs = response.data.items;
+            $scope.totalPages = response.data.pages;
           })
           .catch(function(error) {
             console.log('error', error);
@@ -45,6 +52,8 @@ petShop
         if ($scope.filters.breed !== 'all')
           params.breed = $scope.filters.breed;
 
+        // Return current page to first
+        $scope.currentPage = 1;
         consumeBackend(params);
       };
 
@@ -56,6 +65,18 @@ petShop
           breed: 'all'
         };
 
+        // Return current page to first
+        $scope.currentPage = 1;
+        consumeBackend();
+      };
+
+      $scope.previousPage = function() {
+        $scope.currentPage--;
+        consumeBackend();
+      };
+
+      $scope.nextPage = function() {
+        $scope.currentPage++;
         consumeBackend();
       };
 

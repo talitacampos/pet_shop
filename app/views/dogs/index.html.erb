@@ -101,6 +101,25 @@
             </div>
           </div>
         </div>
+
+        <div class="pagination"
+             ng-if="totalPages !== 1">
+          <a href=""
+             class="btn btn-default"
+             ng-click="previousPage()"
+             ng-disabled="currentPage <= 1">
+            &lt;
+          </a>
+
+          <span>{{ currentPage }} de {{ totalPages }}</span>
+
+          <a href=""
+             class="btn btn-default"
+             ng-click="nextPage()"
+             ng-disabled="currentPage === totalPages">
+            &gt;
+          </a>
+        </div>
       </div>
     </div>
   </div>

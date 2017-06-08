@@ -1,5 +1,7 @@
 NUMBER_DOGS = 1000
 
+RECORDS_PER_PAGE = 20
+
 BREEDS =[
   'Affenpinscher',
   'Afghan hound',

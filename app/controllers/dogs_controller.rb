@@ -5,7 +5,10 @@ class DogsController < ApplicationController
 
   # GET /dogs
   def list
-    @params = {
+    page = (request.query_parameters.key?('page') ? request.query_parameters['page'].to_i : 1)
+    offset = (page - 1) * RECORDS_PER_PAGE
+
+    params = {
       'query': request.query_parameters.key?('query') ?
               ('%' + request.query_parameters['query'] + '%') : '%',
       'genre': request.query_parameters.key?('genre') ?
@@ -16,14 +19,30 @@ class DogsController < ApplicationController
               ('%' + request.query_parameters['breed'] + '%') : '%',
     }
 
-    @dogs = Dog.where(
+    response = {}
+
+    response['items'] = Dog.where(
         '(name LIKE ? OR owner_name LIKE ?) AND genre IN (?) AND castrated IN (?) and breed LIKE ?',
-        @params[:query], @params[:query], @params[:genre], @params[:castrated],
-        @params[:breed])
+        params[:query], params[:query], params[:genre], params[:castrated],
+        params[:breed])
       .order(:name)
+      .limit(RECORDS_PER_PAGE)
+      .offset(offset)
+
+    response['total'] = Dog.where(
+        '(name LIKE ? OR owner_name LIKE ?) AND genre IN (?) AND castrated IN (?) and breed LIKE ?',
+        params[:query], params[:query], params[:genre], params[:castrated],
+        params[:breed])
+      .count
+
+    response['pages'] = response['total'] / RECORDS_PER_PAGE
+
+    if (response['total'] % RECORDS_PER_PAGE) != 0
+      response['pages'] = response['pages'] + 1
+    end
 
     respond_to do |format|
-      format.json { render json: @dogs }
+      format.json { render json: response }
     end
   end
 
