@@ -5,10 +5,32 @@ class DogsController < ApplicationController
 
   # GET /dogs
   def list
-    @dogs = Dog.all
+    @params = {
+      'query': request.query_parameters.key?('query') ?
+              ('%' + request.query_parameters['query'] + '%') : '%',
+      'genre': request.query_parameters.key?('genre') ?
+              [ request.query_parameters['genre'] ] : ['male', 'female'],
+      'castrated': request.query_parameters.key?('castrated') ?
+              [ (request.query_parameters['castrated'] == 'true') ? true : false ] : [true, false],
+      'breed': request.query_parameters.key?('breed') ?
+              ('%' + request.query_parameters['breed'] + '%') : '%',
+    }
+
+    @dogs = Dog.where(
+        '(name LIKE ? OR owner_name LIKE ?) AND genre IN (?) AND castrated IN (?) and breed LIKE ?',
+        @params[:query], @params[:query], @params[:genre], @params[:castrated],
+        @params[:breed])
+      .order(:name)
 
     respond_to do |format|
       format.json { render json: @dogs }
+    end
+  end
+
+  # GET /dogs/breeds
+  def get_breeds
+    respond_to do |format|
+      format.json { render json: BREEDS }
     end
   end
 

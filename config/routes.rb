@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   get 'dogs' => 'dogs#list', defaults: {format: :json}
 
+  get 'dogs/breeds' => 'dogs#get_breeds', defaults: {format: :json}
+
 end

@@ -16,6 +16,55 @@
       <h1>Cães</h1>
 
       <div class="content">
+        <div class="filters">
+          <div class="form-group name">
+            <label>Nome ou nome do proprietário</label>
+            <input type="text"
+                   ng-model="filters.query"
+                   class="form-control">
+          </div>
+
+          <div class="form-group genre">
+            <label>Gênero</label>
+            <select ng-model="filters.genre">
+              <option value="all">Todos</option>
+              <option value="male">Macho</option>
+              <option value="female">Fêmea</option>
+            </select>
+          </div>
+
+          <div class="form-group castrated">
+            <label>Castrado</label>
+            <select ng-model="filters.castrated">
+              <option value="all">Todos</option>
+              <option value="yes">Sim</option>
+              <option value="no">Não</option>
+            </select>
+          </div>
+
+          <div class="form-group breed">
+            <label>Raça</label>
+            <select ng-model="filters.breed">
+              <option value="all">Todas</option>
+              <option ng-repeat="breed in breeds" ng-value="breed">{{ breed }}</option>
+            </select>
+          </div>
+
+          <div class="buttons">
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="searchDogs()">
+              Pesquisar
+            </button>
+
+            <button type="button"
+                    class="btn btn-default"
+                    ng-click="clearFilters()">
+              Limpar
+            </button>
+          </div>
+        </div>
+
         <div class="table">
           <div class="row header">
             <div class="column name">Nome</div>
