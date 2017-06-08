@@ -1,18 +1,18 @@
-<div ng-app="petShop">
+<div class="loading">
+</div>
+
+<div ng-app="petShop"
+     class="main-content hidden">
 
   <div ng-controller="DogsController"
        class="dogs">
 
-    <div class="loading"
-         ng-if="loading">
-    </div>
-
     <div class="error"
-         ng-if="!loading && hasError">
+         ng-if="hasError">
       Ocorreu algum problema na aplicação. Favor recarregá-la.
     </div>
 
-    <div ng-if="!loading && !hasError">
+    <div ng-if="!hasError">
       <h1>Cães</h1>
 
       <div class="content">
@@ -106,8 +106,8 @@
             </div>
           </div>
 
-          <div class="!refreshingTable && empty-table"
-               ng-if="totalDogs === 0">
+          <div class="empty-table"
+               ng-if="!refreshingTable && totalDogs === 0">
             Não há resultados a serem exibidos
           </div>
         </div>

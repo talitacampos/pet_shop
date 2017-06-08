@@ -2,7 +2,6 @@ petShop
   .controller('DogsController', ['$scope', '$http',
     function($scope, $http) {
       $scope.dogs = [];
-      $scope.loading = true;
       $scope.hasError = false;
       $scope.filters = {
         query: '',
@@ -13,7 +12,7 @@ petShop
       $scope.currentPage = 1;
       $scope.totalPages = 0;
       $scope.totalDogs = 0;
-      $scope.refreshingTable = false;
+      $scope.refreshingTable = true;
 
       var consumeBackend = function(params) {
         $scope.refreshingTable = true;
@@ -38,7 +37,6 @@ petShop
             $scope.hasError = true;
           })
           .finally(function() {
-            $scope.loading = false;
             $scope.refreshingTable = false;
           });
       };
@@ -94,7 +92,6 @@ petShop
         .catch(function(error) {
           console.log('error', error);
           $scope.hasError = true;
-          $scope.loading = false;
         });
     }
   ]);
