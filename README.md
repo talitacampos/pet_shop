@@ -1,24 +1,40 @@
-# README
+# Pet Shop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este é uma pequena aplicação em Rails que gera dados aleatórios de 1000 cachorros e os apresenta em uma listagem com filtros.
 
-Things you may want to cover:
+Para construção do mesmo foi utilizado Rails (5.0.3), Bootstrap e AngularJS.
 
-* Ruby version
+## Configuração
 
-* System dependencies
+Para esta aplicação, é necessário que o bower esteja instalado na sua máquina. Caso não o tenha, instale-o usando:
+```bash
+$ npm install -g bower
+```
 
-* Configuration
+Em seguida, clone o projeto e, de dentro do diretório em que foi feito o clone, execute os seguintes comandos:
+```bash
+$ bundle install
+$ rake -T bower
+$ rake bower:install
+```
 
-* Database creation
+Também é necessário rodar as migrations com:
+```bash
+$ rails db:migrate/
+```
 
-* Database initialization
+Feito assim, você já pode rodar a aplicação com:
+```bash
+$ rails s
+```
 
-* How to run the test suite
+Com a aplicação rodando, já é possível acessar a tela com a listagem de cachorros em http://localhost:3000. Entretanto, a listagem estará vazia.
 
-* Services (job queues, cache servers, search engines, etc.)
+Para gerar os dados dos cachorros é necessário acessar a url http://localhost:3000/populate/dogs. Ao fim do carregamento, você poderá retornar à url da listagem e atualizá-la obtendo os dados gerados.
 
-* Deployment instructions
+## Testes
 
-* ...
+Para rodar os testes, execute de dentro do diretório raiz:
+```bash
+$ rails test
+```
