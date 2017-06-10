@@ -99,10 +99,10 @@
               <span class="label">Castrado:</span>{{ dog.castrated ? 'Sim' : 'Não' }}
             </div>
             <div class="column birth">
-              <span class="label">Data de Nascimento:</span>{{ dog.birth }}
+              <span class="label">Data de Nascimento:</span>{{ dog.birth | date: 'dd/MM/yyyy' }}
             </div>
             <div class="column last_visit">
-              <span class="label">Última Consulta:</span>{{ dog.last_visit }}
+              <span class="label">Última Consulta:</span>{{ dog.last_visit | date: 'dd/MM/yyyy' }}
             </div>
           </div>
 

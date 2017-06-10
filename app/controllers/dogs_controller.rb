@@ -68,19 +68,31 @@ class DogsController < ApplicationController
 
   private
     def generate_dog_data
+      Faker::Config.locale = 'pt-BR'
+
       # We store the birth in a variable because we will use it to determine the last visit
       birth = Time.at(rand * (Time.now.to_f))
 
       data = {
-        :name => Faker::Cat.name,
         :breed => BREEDS[rand(414)],
         :genre => (rand(100) % 2 == 1) ? 'male' : 'female',
         :castrated => (rand(100) % 2 == 1) ? true : false,
         :birth => birth.strftime('%d/%m/%Y'),
         :owner_name => Faker::Name.name,
-        :owner_phone => Faker::PhoneNumber.cell_phone,
-        :last_visit => Time.at(birth + rand * (Time.now.to_f - birth.to_f)).strftime('%d/%m/%Y')
+        :owner_phone => Faker::PhoneNumber.phone_number
       }
+      data[:name] = (data[:genre] == 'male') ? MALE_DOGS[rand(100)] : FEMALE_DOGS[rand(100)]
+
+      # The dogs live on average 10 years, so we can't let the last visit be bigger than
+      # this nor greater than today
+      maxDate = birth + 10.years
+
+      if maxDate >= Time.now
+        maxDate = Time.now
+      end
+
+      # The last visit will be between birth and max date
+      data[:last_visit] = Time.at(birth + rand * (maxDate.to_f - birth.to_f)).strftime('%d/%m/%Y')
 
       dog = Dog.new(data)
 
