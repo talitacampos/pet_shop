@@ -38,7 +38,7 @@ class DogsController < ApplicationController
     response['pages'] = response['total'] / RECORDS_PER_PAGE
 
     if (response['total'] % RECORDS_PER_PAGE) != 0
-      response['pages'] = response['pages'] + 1
+      response['pages'] += 1
     end
 
     respond_to do |format|
@@ -69,22 +69,21 @@ class DogsController < ApplicationController
   private
     def generate_dog_data
       # We store the birth in a variable because we will use it to determine the last visit
-      @birth = Time.at(rand * (Time.now.to_f))
+      birth = Time.at(rand * (Time.now.to_f))
 
-      @data = {
+      data = {
         :name => Faker::Cat.name,
         :breed => BREEDS[rand(414)],
         :genre => (rand(100) % 2 == 1) ? 'male' : 'female',
         :castrated => (rand(100) % 2 == 1) ? true : false,
-        :birth => @birth.strftime('%d/%m/%Y'),
+        :birth => birth.strftime('%d/%m/%Y'),
         :owner_name => Faker::Name.name,
         :owner_phone => Faker::PhoneNumber.cell_phone,
-        :last_visit => Time.at(@birth + rand * (Time.now.to_f - @birth.to_f)).strftime('%d/%m/%Y')
+        :last_visit => Time.at(birth + rand * (Time.now.to_f - birth.to_f)).strftime('%d/%m/%Y')
       }
-      puts @data
 
-      @dog = Dog.new(@data)
+      dog = Dog.new(data)
 
-      @dog.save
+      dog.save
     end
 end
